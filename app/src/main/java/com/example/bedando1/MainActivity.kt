@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
             {
                 GlobalScope.launch(Dispatchers.Main)
                 {
-                    for (i in 1..8){
+                    for (i in 1..3){
 
-                        delay(400)
+                        delay(300)
                         imageView.setImageResource(kockakepek[random.nextInt(kockakepek.size)])
                     }
 
@@ -76,25 +76,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         random = Random
 
         imageView =  findViewById(R.id.imageView)
 
-        imageView.setImageResource(kockakepek[random.nextInt(kockakepek.size)])
+        imageView.setImageResource(kockakepek[0])
 
-        imageView.setOnClickListener {
-            GlobalScope.launch(Dispatchers.Main)
-            {
-                for (i in 1..10){
 
-                    delay(180)
-                    imageView.setImageResource(kockakepek[random.nextInt(kockakepek.size)])
-                }
-
-            }
-        }
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     }
