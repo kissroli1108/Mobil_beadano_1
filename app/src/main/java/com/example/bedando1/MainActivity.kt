@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     var currentAcc = 0.0
     var prevAcc = 0.0
     var changeInAcc = 0.0
+    var shake = false
     private lateinit var sensorManager: SensorManager
     private var acc = object : SensorEventListener {
         override fun onSensorChanged(event: SensorEvent) {
@@ -48,18 +49,21 @@ class MainActivity : AppCompatActivity() {
             prevAcc = currentAcc
 
 
-            if (changeInAcc>15)
+            if (changeInAcc>13 && !shake)
             {
                 GlobalScope.launch(Dispatchers.Main)
                 {
-                    for (i in 1..3){
+                    for (i in 1..5){
 
                         delay(300)
                         imageView.setImageResource(kockakepek[random.nextInt(kockakepek.size)])
                     }
 
                 }
+                shake = true
             }
+            else if (changeInAcc>13)
+                shake = false
         }
 
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
